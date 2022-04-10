@@ -1,0 +1,47 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Http\Controllers\Controller;
+use App\Traits\DeletableActions;
+use Illuminate\Http\RedirectResponse;
+use App\Repositories\{{ RepoName }}\{{ InterfaceName }};
+use App\Http\Requests\{{ RequestClass }};
+
+class {{ class }} extends Controller
+{
+    use DeletableActions;
+
+    private $repository;
+
+    public function __construct({{ InterfaceName }} $repository)
+    {
+        $this->middleware('auth');
+
+        $this->repository = $repository;
+    }
+
+    public function index()
+    {
+        return view({{ index_blade_path }});
+    }
+
+    public function accountsDatatable($datatable)
+    {
+        return $datatable->query($this->repository->all())->datatable();
+    }
+
+    public function store({{ RequestClass }} $request): RedirectResponse
+    {
+        $this->repository->store($request);
+
+        return toBackWithSaveMessage();
+    }
+
+    public function update({{ RequestClass }} $request, $id): RedirectResponse
+    {
+        $this->repository->update($request, $id);
+
+        return toBackWithUpdatedMessage();
+    }
+}

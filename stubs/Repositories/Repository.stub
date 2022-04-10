@@ -1,0 +1,66 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Traits\DeletableInRepository;
+use Illuminate\Http\Request;
+use App\Queries\{{ DummyQueryClass }};
+
+class {{class}} {{interface}}
+{
+    use DeletableInRepository;
+
+    protected $model;
+
+    protected $queries;
+
+    /**
+     * Instantiate repository
+     *
+     * @param $model
+     */
+    public function __construct({{ DummyModelClass }} $model, {{ DummyQueryClass }} $queries)
+    {
+        $this->model = $model;
+
+        $this->queries = $queries;
+    }
+
+    /**
+     * Find specific data
+     * @param $id
+     * @param bool $egar
+     */
+    public function find($id, $egar = true){
+
+    }
+
+    /**
+     * Query to fetch all data
+     *
+     * @param Request|null $request
+     * @return mixed
+     */
+    public function all(Request $request = null){
+        return $this->queries->all();
+    }
+
+    /**
+     * Store request data
+     *
+     * @param Request $request
+     */
+    public function store(Request $request){
+        // store data
+    }
+
+    /**
+     * Update specific request data
+     *
+     * @param Request $request
+     * @param $id
+     */
+    public function update(Request $request, $id){
+        // update data
+    }
+}

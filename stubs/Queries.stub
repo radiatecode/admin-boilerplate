@@ -1,0 +1,20 @@
+php
+
+namespace DummyNamespace;
+
+use App\Traits\ResolveQueryBuilder;
+
+class {{class}}
+{
+    use ResolveQueryBuilder;
+
+    // query methods
+    public function all()
+    {
+        return $this->builder()
+             ->with('creator:id,name')
+             ->orderBy('id', 'desc')
+             ->get();
+    }
+
+}

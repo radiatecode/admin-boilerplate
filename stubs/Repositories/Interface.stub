@@ -1,0 +1,38 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Contracts\WithDeletable;
+use Illuminate\Http\Request;
+
+interface {{class}} extends WithDeletable
+{
+    /**
+     * Find specific data
+     * @param $id
+     * @param bool $egar
+     */
+    public function find($id, $egar = true);
+
+    /**
+     * Query to fetch all data
+     *
+     * @param Request|null $request
+     */
+    public function all(Request $request = null);
+
+    /**
+     * Store request data
+     *
+     * @param Request $request
+     */
+    public function store(Request $request);
+
+    /**
+     * Update specific request data
+     *
+     * @param Request $request
+     * @param $id
+     */
+    public function update(Request $request, $id);
+}
