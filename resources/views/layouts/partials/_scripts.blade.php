@@ -11,7 +11,7 @@
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
 
 <!-- sweet alert -->
-<script src="{{ asset('js/plugins/sweetalert/sweetalert2.js') }}"></script>
+<script src="{{ asset('js/plugins/sweetalert2/sweetalert2.js') }}"></script>
 
 <!-- toast -->
 <script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
@@ -90,6 +90,15 @@
     });
 
     function logout(){
-        // logout code here
+        networkRequest('alert').ajax({
+            url : '{{ route('logout') }}',
+            type : 'post'
+        },function (response){
+            window.location.href = '{{ route('login') }}';
+        },function (error){
+            if (error.status === 419) {
+                toastr.error('Please reload the page.', 'Page expired!', {progressBar: true});
+            }
+        });
     }
 </script>

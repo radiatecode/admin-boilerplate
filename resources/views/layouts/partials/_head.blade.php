@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
 
 <!-- sweet alert -->
-<link rel="stylesheet" href="{{ asset('js/plugins/sweetalert/sweetalert2.css') }}">
+<link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2/sweetalert2.css') }}">
 {{--<link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">--}}
 
 <!-- select2 -->

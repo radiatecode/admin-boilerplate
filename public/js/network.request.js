@@ -3,7 +3,8 @@
  * customise the success & error function for loading spinner
  */
 function networkRequest(loader = 'overlay', csrf = true) {
-    var ajax_spinner = $('#ajax_spinner'); // the div is in the index.blade.php file
+    var ajax_spinner = $('#ajax_spinner');
+
     var token = $('meta[name="csrf-token"]').attr('content');
 
     var customAjax = {};
@@ -25,7 +26,7 @@ function networkRequest(loader = 'overlay', csrf = true) {
                     title: 'Please Wait !',
                     html: 'data uploading',
                     allowOutsideClick: false,
-                    onBeforeOpen: () => {
+                    didOpen: () => {
                         Swal.showLoading()
                     },
                 });
