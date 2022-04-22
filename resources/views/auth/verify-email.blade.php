@@ -1,39 +1,57 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.guest')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
+@section('title',config('app.name') . ' | Verify Email')
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+@push('css')
+    <style>
+        .verify-email-box {
+            width: 390px;
+        }
+    </style>
+@endpush
+
+@section('content')
+    <div class="verify-email-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="#" class="h1"><b>HrP</b>Integrator</a>
             </div>
-        @endif
+            <div class="card-body">
+                <p class="login-box-msg">{{ __('Verify Email') }}</p>
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
+                @if (session('status') == 'verification-link-sent')
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-check"></i> Success!</h5>
+                        {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                    </div>
+                @endif
 
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
+                <p>
+                    {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+                </p>
+
+                <div class="row">
+                    <div class="col-8">
+                        <form action="{{ route('verification.send') }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-block">{{ __('Resend Verification Email') }}</button>
+                        </form>
+                    </div>
+
+                    <div class="col-4">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary btn-block">{{ __('Logout') }}</button>
+                        </form>
+                    </div>
                 </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
+            </div>
+            <!-- /.card-body -->
         </div>
-    </x-auth-card>
-</x-guest-layout>
+        <!-- /.card -->
+    </div>
+@endsection
+
+

@@ -24,7 +24,7 @@ function networkRequest(loader = 'overlay', csrf = true) {
             defaults.beforeSend = function () {
                 Swal.fire({
                     title: 'Please Wait !',
-                    html: 'data uploading',
+                    html: 'processing...',
                     allowOutsideClick: false,
                     didOpen: () => {
                         Swal.showLoading()

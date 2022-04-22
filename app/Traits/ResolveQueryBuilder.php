@@ -4,27 +4,38 @@
 namespace App\Traits;
 
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 trait ResolveQueryBuilder
 {
-    private $builder = null;
+    /**
+     * @var Model $model
+     */
+    private Model $model;
 
     public static function query()
     {
         return new self();
     }
 
-    protected function builder(): Builder
+    protected function eloquentBuilder(): EloquentBuilder
     {
-        if ($this->builder){
-            return $this->builder;
-        }
+        $this->resolveBuilder();
 
-        return  $this->builder = $this->resolveBuilder();
+        return  $this->model->newQuery();
     }
 
-    protected function resolveBuilder(): Builder
+    protected function queryBuilder(): QueryBuilder
+    {
+        $this->resolveBuilder();
+
+        return DB::table($this->model->getTable());
+    }
+
+    protected function resolveBuilder()
     {
         $class = class_basename(__CLASS__);
 
@@ -32,6 +43,6 @@ trait ResolveQueryBuilder
 
         $namespace = "App\Models\\".$model;
 
-        return (new $namespace())->newQuery();
+        $this->model = new $namespace();
     }
 }

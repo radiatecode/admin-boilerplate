@@ -35,7 +35,15 @@ function laravelErrors(errors){
 
             if (singleElm.length > 0){
                 singleElm[0].classList.add("is-invalid");
-                singleElm[0].parentNode.querySelector(".invalid-feedback").innerHTML = value[0]; // value.join(' ') [to show all errors for this key]
+
+
+                var invalid = singleElm[0].parentNode.querySelector(".invalid-feedback");
+
+                if (invalid){
+                    invalid.innerHTML = value[0]; // value.join(' ') [to show all errors for this key]
+                }else{
+                    singleElm[0].parentNode.innerHTML += '<span class="error invalid-feedback">'+ value[0] +'</span>';
+                }
             }else{
                 generalErrors.push(value[0]);
             }
@@ -57,7 +65,7 @@ function laravelErrors(errors){
  * @param errors
  */
 $.laravelErrorShow = function (errors){
-   laravelErrors(errors);
+    laravelErrors(errors);
 }
 
 $.removeLaravelErrors = function (){

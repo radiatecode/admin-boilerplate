@@ -9,7 +9,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
-class MakeCrudBoilerplateCommand extends GeneratorCommand
+class MakeCrudCommand extends GeneratorCommand
 {
     protected $indexBladePath;
 

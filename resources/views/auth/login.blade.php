@@ -18,8 +18,7 @@
                         <input id="email" type="email"
                                class="form-control @error('email') is-invalid @enderror"
                                name="email" value="{{ old('email') }}"
-                               placeholder="Email"
-                               autocomplete="email" autofocus required>
+                               placeholder="Email" autofocus required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -27,8 +26,8 @@
                         </div>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="input-group mb-3">

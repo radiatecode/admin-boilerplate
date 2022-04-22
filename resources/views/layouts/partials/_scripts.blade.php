@@ -32,6 +32,9 @@
 {{--<script type="text/javascript" src="{{ asset('js/plugins/wickedpicker/dist/wickedpicker.min.js')  }}"></script>--}}
 {{--<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>--}}
 
+<!-- Parsley Plugin-->
+<script src="{{ asset('js/plugins/parsley/parsley.min.js') }}" type="text/javascript"></script>
+
 <!-- network request js -->
 <script src="{{ asset('js/network.request.js') }}"></script>
 
@@ -88,6 +91,45 @@
             });
         });
     });
+
+    function validateAndSubmit(){
+        var $form = $('#modal-form');
+
+        $form.parsley().on('field:validated', function () {
+            var ok = $('.parsley-error').length === 0;
+            $('.bs-callout-info').toggleClass('hidden', !ok);
+            $('.bs-callout-warning').toggleClass('hidden', ok);
+        }).on('form:submit', function (e) {
+            $.removeLaravelErrors();
+
+            var formData = new FormData($form[0]);
+
+            networkRequest('alert').ajax({
+                url: $form.attr('action'),
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json'
+            },function (response){
+                if (response === 'success'){
+                    window.location.reload();
+                }
+            },function (error){
+                console.error(error.responseJSON);
+
+                if (error.status === 422){
+                    $.laravelErrorShow(error.responseJSON.errors);
+                }
+
+                if (error.status === 404){
+                    toastr.error(error.responseJSON.message, 'Not Found!', {progressBar: true});
+                }
+            });
+
+            return false;
+        });
+    }
 
     function logout(){
         networkRequest('alert').ajax({

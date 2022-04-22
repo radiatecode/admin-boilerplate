@@ -23,7 +23,7 @@
     </select>
     <input type="hidden" id="_{{ $id }}_text" name="_{{ $id }}_text" value="{{ old('_'.$id.'_text') }}">
     <span class="error invalid-feedback">{{ $errors->first($id) }}</span>
-    @push('scripts')
+    @push('js')
     <script type="text/javascript">
         let ${{ $id }} = $('#{{ $id }}').select2({
             placeholder: 'Select {{ $attributes['label'] ?? str_label($id)}}...',

@@ -16,6 +16,7 @@
 
                 <form action="{{ route('register') }}" method="post">
                     @csrf
+{{--                    <input type="hidden" name="_timezone" id="_timezone">--}}
                     <div class="input-group mb-3">
                         <input id="name" type="text"
                                class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"
@@ -110,7 +111,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <input type="checkbox" id="agreeTerms" name="is_terms_agreed" value="1">
                                 <label for="agreeTerms">
                                     I agree to the <a href="#">terms</a>
                                 </label>
@@ -133,3 +134,9 @@
         <!-- /.card -->
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $('#_timezone').val(moment.tz.guess());
+    </script>
+@endpush

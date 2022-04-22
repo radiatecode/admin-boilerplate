@@ -41,15 +41,20 @@
         }
     };
 
-    $.fn.deleteAllConfirm = function (options)
+    $.fn.deleteSelectedConfirm = function (url = null)
     {
         var selector = $(this).getSelector();
 
-        if (selector !== undefined)
-        {
+        if (selector !== undefined) {
             $(document).on("click", selector, function ()
             {
-                var values = checkBoxValues(options);
+                var values = checkBoxValues();
+
+                var options = {};
+
+                if(! url){
+                    options.url = $(this).data('delete-url');
+                }
 
                 if (values.length !== 0) {
                     options.type = "POST";
@@ -61,7 +66,7 @@
                     Swal.fire({
                         title: 'First Select The Items!',
                         text: 'you need to select the items to delete',
-                        type: 'warning'
+                        icon: 'warning'
                     });
                 }
             });
@@ -87,7 +92,7 @@
         Swal.fire({
             title: 'Are you sure?',
             text: options.type === 'POST' ? title + "items?" : title + "item?",
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -118,12 +123,12 @@
             },
             allowOutsideClick: () => !Swal.isLoading()
         }).then(function (result) {
-           window.location.reload();
+            window.location.reload();
         });
     }
 
-    let checkBoxValues = function (options) {
-        var bulkIds = options.htmlCheckboxElement !== undefined ? options.htmlCheckboxElement : 'input[name="bulkIds[]"]';
+    let checkBoxValues = function () {
+        var bulkIds = 'input[name="bulkIds[]"]';
 
         var arr = $(bulkIds + ':checked').map(function () {
             return this.value; // $(this).val()
