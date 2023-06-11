@@ -1,0 +1,17 @@
+<?php
+
+namespace DummyNamespace;
+
+
+{{ DTOnamespace }}
+
+class {{ class }}
+{
+    /**
+    * Execute the action
+    */
+    public static function execute({{ DTOarg }})
+    {
+       // logic
+    }
+}

@@ -15,10 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tenant_id')->index();
-            $table->unsignedBigInteger('office_id')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->longText('role_permissions')->nullable(); // extra permissions outside the role
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 100)->unique();
@@ -28,11 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('type',100); // system user or employee
             $table->boolean('active')->default(1);
-            $table->boolean('is_owner')->default(0); // is organisation owner
+            $table->boolean('is_super')->default(0); // is organisation owner
             $table->rememberToken();
             $table->timestamps();
-//            $table->foreign('tenant_id')->references('id')
-//                ->on('tenants')->cascadeOnDelete();
         });
     }
 

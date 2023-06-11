@@ -1,12 +1,13 @@
 /**
  *
  * @param errors
+ * @param showAsList
  */
-function laravelErrors(errors){
+function laravelErrors(errors,showAsList = false){
     // remove previous error message
     $.removeLaravelErrors();
 
-    var generalErrors = [];
+    var generalErrors = '';
 
     // error loop
     $.each(errors, function (key, value) {
@@ -33,9 +34,8 @@ function laravelErrors(errors){
         }else{
             var singleElm = document.getElementsByName(key);
 
-            if (singleElm.length > 0){
+           if (singleElm.length > 0){
                 singleElm[0].classList.add("is-invalid");
-
 
                 var invalid = singleElm[0].parentNode.querySelector(".invalid-feedback");
 
@@ -44,31 +44,71 @@ function laravelErrors(errors){
                 }else{
                     singleElm[0].parentNode.innerHTML += '<span class="error invalid-feedback">'+ value[0] +'</span>';
                 }
-            }else{
-                generalErrors.push(value[0]);
-            }
+           }
+        }
+
+        if (showAsList){
+            generalErrors += '<li>' + value[0] + '</li>';
         }
     });
 
-    if (generalErrors.length > 0){
-        Swal.fire({
-            title: 'Error !',
-            html: generalErrors.join(', '),
-            type: 'error'
-        })
+    if (showAsList){
+        var unOrderErrorList = '<div class="alert alert-danger">\n' +
+            '<ul>\n' +
+             generalErrors+'\n' +
+            '</ul>\n' +
+            '</div>';
+
+       $('.laravel-errors').html(unOrderErrorList);
     }
+}
+
+function laravelErrorsWithToast(errors){
+    // error loop
+    $.each(errors, function (key, value) {
+        toastr.error(value[0], 'Error!', {progressBar: true});
+    });
+}
+
+function laravelErrorsWithList(errors){
+    var generalErrors = '';
+
+    // error loop
+    $.each(errors, function (key, value) {
+        generalErrors += '<li>' + value[0] + '</li>';
+    });
+
+    var unOrderErrorList = '<div class="alert alert-danger">\n' +
+        '<ul>\n' +
+        generalErrors+'\n' +
+        '</ul>\n' +
+        '</div>';
+
+    $('.laravel-errors').html(unOrderErrorList);
 }
 
 /**
  * jquery error show function
  *
  * @param errors
+ * @param showAsList
  */
-$.laravelErrorShow = function (errors){
-    laravelErrors(errors);
+$.laravelErrorShow = function (errors,showAsList = false){
+   laravelErrors(errors,showAsList);
+}
+
+$.laravelErrorWithToast = function (errors){
+    laravelErrorsWithToast(errors);
+}
+
+$.laravelErrorsWithList = function (errors){
+    laravelErrorsWithList(errors);
 }
 
 $.removeLaravelErrors = function (){
     $('.form-control').removeClass('is-invalid');
+
     $('.error').html('');
+
+    $('.laravel-errors').html('');
 }

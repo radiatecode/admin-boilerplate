@@ -44,9 +44,7 @@ class MakeQueryCommand extends GeneratorCommand
     {
         $name = $this->qualifyClass($this->getNameInput());
 
-        $nameOfTheQuery = $name.'Queries';
-
-        $path = $this->getPath($nameOfTheQuery);
+        $path = $this->getPath($name);
 
         if ((! $this->hasOption('force') ||
                 ! $this->option('force')) &&
@@ -58,7 +56,7 @@ class MakeQueryCommand extends GeneratorCommand
 
         $this->makeDirectory($path);
 
-        $this->files->put($path, $this->sortImports($this->buildClass($nameOfTheQuery)));
+        $this->files->put($path, $this->sortImports($this->buildClass($name)));
 
         return true;
     }

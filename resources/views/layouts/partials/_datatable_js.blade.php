@@ -7,5 +7,5 @@
 <script src="{{ asset('js/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
 
 <!-- delete data by confirm -->
-<script src="{{ asset('js/fire-swal-delete.js') }}"></script>
+<script src="{{ asset('js/delete-event.js') }}"></script>
 

@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -37,7 +37,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar"
-                             class="img-size-50 mr-3 img-circle">
+                            class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -54,7 +54,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar"
-                             class="img-size-50 img-circle mr-3">
+                            class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
@@ -71,7 +71,7 @@
                     <!-- Message Start -->
                     <div class="media">
                         <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar"
-                             class="img-size-50 img-circle mr-3">
+                            class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
@@ -115,16 +115,39 @@
             </div>
         </li>
         <li class="nav-item">
-            <button class="btn btn-link text-warning"
-                    onclick="logout()"
-                    title="Logout">
+            <button class="btn btn-link text-warning" onclick="logout()" title="Logout">
                 <i class="fas fa-power-off"></i>
             </button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-            </a>
+            <button type="button" id="theme-mode" class="btn btn-link" title="Mode">
+                <i id="theme-mode-icon" class="fas fa-sun"></i>
+            </button>
         </li>
     </ul>
 </nav>
+
+@prepend('js')
+    <script>
+        $('#theme-mode').click(function() {
+            var $main_header = $('.main-header');
+            var $main_sidebar = $('.main-sidebar');
+
+            if ($('body').hasClass('dark-mode')) { // light
+                $(this).removeClass('text-white');
+                $('#theme-mode-icon').removeClass('fa-moon').addClass('fa-sun');
+
+                $('body').removeClass('dark-mode');
+                $main_header.removeClass('navbar-dark').addClass('navbar-light');
+                $main_sidebar.removeClass('sidebar-dark-maroon').addClass('sidebar-light-olive');
+            } else { // dark
+                $(this).addClass('text-white');
+                $('#theme-mode-icon').removeClass('fa-sun').addClass('fa-moon');
+
+                $('body').addClass('dark-mode');
+                $main_header.removeClass('navbar-light').addClass('navbar-dark');
+                $main_sidebar.removeClass('sidebar-light-olive').addClass('sidebar-dark-maroon');
+            }
+        });
+    </script>
+@endprepend

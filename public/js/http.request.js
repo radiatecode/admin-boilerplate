@@ -2,12 +2,12 @@
  * extend the default jquery ajax
  * customise the success & error function for loading spinner
  */
-function networkRequest(loader = 'overlay', csrf = true) {
+function httpRequest(loader = 'overlay', csrf = true) {
     var ajax_spinner = $('#ajax_spinner');
 
     var token = $('meta[name="csrf-token"]').attr('content');
 
-    var customAjax = {};
+    var request = {};
     var defaults = {};
 
     if (csrf) {
@@ -16,7 +16,7 @@ function networkRequest(loader = 'overlay', csrf = true) {
         }
     }
 
-    customAjax.ajax = function (options, successCallback, errorCallback) {
+    request.config = function (options, successCallback, errorCallback) {
 
         if (loader === 'overlay') {
             ajax_spinner.removeClass('hidden');
@@ -57,9 +57,10 @@ function networkRequest(loader = 'overlay', csrf = true) {
         }
 
         $.extend(options, defaults);  //merge passed options to defaults
+
         return $.ajax(options); //send request
     };
 
 
-    return customAjax;
+    return request;
 }

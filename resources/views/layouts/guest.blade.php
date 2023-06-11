@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('js/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     @stack('css')
 </head>

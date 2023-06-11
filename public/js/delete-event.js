@@ -1,20 +1,10 @@
 "use strict";
 (function ($, window, i) {
-    /* get selector name */
-    $.fn._init = $.fn.init;
-
-    $.fn.init = function (selector, context, root) {
-        return (typeof selector === 'string') ?
-            new $.fn._init(selector, context, root).data('selector', selector) :
-            new $.fn._init(selector, context, root);
-    };
-
     $.fn.getSelector = function () {
         return $(this).data('selector');
     };
-    /* ..end get selector name*/
 
-    $.fn.deleteConfirm = function () {
+    $.fn.delete = function () {
         var selector = $(this).getSelector();
 
         if (selector !== undefined)
@@ -28,12 +18,12 @@
                     Swal.fire({
                         title: 'Attribute Missing !',
                         text: 'Add data-delete-url attribute to the deletable button',
-                        type: 'error'
+                        icon: 'error'
                     });
                 } else {
                     deleteAjax({
                         url: url,
-                        type: "DELETE"
+                        type: "DELETE",
                     });
                 }
 
@@ -41,7 +31,7 @@
         }
     };
 
-    $.fn.deleteSelectedConfirm = function (url = null)
+    $.fn.bulkDelete = function (url = null)
     {
         var selector = $(this).getSelector();
 
@@ -59,12 +49,12 @@
                 if (values.length !== 0) {
                     options.type = "POST";
 
-                    options.data = {selected_rows: values};
+                    options.data = {selected_items: values};
 
                     deleteAjax(options);
                 } else {
                     Swal.fire({
-                        title: 'First Select The Items!',
+                        title: 'No Items Are Selected!',
                         text: 'you need to select the items to delete',
                         icon: 'warning'
                     });
@@ -103,11 +93,12 @@
                     .done(function (response) {return response;})
                     .fail(function (error) {
                         Swal.close();
-                        if (error.status === 404) {
+
+                        if ($.inArray(error.status,[400,401,403,404,406]) !== -1) {
                             Swal.fire({
-                                title: 'Error!',
-                                text: 'Data not found!',
-                                type: 'error',
+                                title: 'Error! - '+error.statusText,
+                                text: error.responseJSON.message ? error.responseJSON.message : error.responseJSON,
+                                icon: 'error',
                             });
 
                             return;
@@ -121,9 +112,12 @@
                         console.error(error);
                     });
             },
+            backdrop: true,
             allowOutsideClick: () => !Swal.isLoading()
         }).then(function (result) {
-            window.location.reload();
+            if (result.value) {
+                window.location.reload();
+            }
         });
     }
 

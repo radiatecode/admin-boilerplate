@@ -35,8 +35,11 @@
 <!-- Parsley Plugin-->
 <script src="{{ asset('js/plugins/parsley/parsley.min.js') }}" type="text/javascript"></script>
 
+<!-- jquery selector js -->
+<script src="{{ asset('js/jquery-selector-init.js') }}"></script>
+
 <!-- network request js -->
-<script src="{{ asset('js/network.request.js') }}"></script>
+<script src="{{ asset('js/http.request.js') }}"></script>
 
 <!-- laravel validation message js -->
 <script src="{{ asset('js/laravel.validation.message.js') }}"></script>

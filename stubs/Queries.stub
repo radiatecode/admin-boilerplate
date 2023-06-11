@@ -1,20 +1,11 @@
-php
+<?php
 
 namespace DummyNamespace;
 
-use App\Traits\ResolveQueryBuilder;
+use App\Abstracts\ModelQueries;
 
-class {{class}}
+class {{class}} extends ModelQueries
 {
-    use ResolveQueryBuilder;
-
-    // query methods
-    public function all()
-    {
-        return $this->builder()
-             ->with('creator:id,name')
-             ->orderBy('id', 'desc')
-             ->get();
-    }
+    
 
 }

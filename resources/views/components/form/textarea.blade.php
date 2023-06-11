@@ -12,6 +12,6 @@
     'name' => $attributes['name'],
     'class'=> 'form-control' . ($errors->has($attributes['name']) ? ' is-invalid' : ''),
     'placeholder' => $attributes['label'] ?? str_label($attributes['name']) . '...'
-    ]) }}>{{ old($attributes['name'],$attributes['default-value']) }}</textarea>
+    ]) }}>{{ old($attributes['name'],$attributes['value']) }}</textarea>
     <span class="error invalid-feedback">{{ $errors->first($attributes['name']) }}</span>
 </div>

@@ -13,7 +13,7 @@
     'name' => $attributes['name'],
     'class'=> 'form-control' . ($errors->has($attributes['name']) ? ' is-invalid' : ''),
     'placeholder' => $attributes['label'] ?? str_label($attributes['name']) . '...',
-    'value' => old($attributes['name'], $attributes['default-value'])
+    'value' => old($attributes['name'], $attributes['value'])
     ]) }} {{ $attributes['required-when'] ? 'required' : '' }}/>
     <span class="error invalid-feedback">{{ $errors->first($attributes['name']) }}</span>
 </div>
