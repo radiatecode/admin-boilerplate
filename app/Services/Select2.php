@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use InvalidArgumentException;
 
-class Select2Service
+class Select2
 {
     protected LengthAwarePaginator $pagniateResult;
     protected array $mapData = [];
