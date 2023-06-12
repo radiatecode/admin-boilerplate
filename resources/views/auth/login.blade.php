@@ -7,7 +7,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>HrP</b>Integrator</a>
+                <a href="#" class="h1"><b>{{ config('app.name') }}</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">{{ __('Sign in') }}</p>

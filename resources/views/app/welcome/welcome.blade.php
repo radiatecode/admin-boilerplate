@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Welcome to DaPAYROLL management system')
+@section('title','Welcome')
 
 @push('css')
     {{-- Extra page wise style sheets --}}

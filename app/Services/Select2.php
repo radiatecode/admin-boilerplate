@@ -26,7 +26,7 @@ class Select2
      *
      * @param Builder|QueryBuilder|callable $query
      */
-    public function query($query): Select2Service
+    public function query($query): Select2
     {
         if (is_callable($query)) {
             $query = $query();
@@ -45,9 +45,9 @@ class Select2
      * Map the data to transform into select2 data
      *
      * @param callable $map
-     * @return Select2Service
+     * @return Select2
      */
-    public function map(callable $map): Select2Service
+    public function map(callable $map): Select2
     {
         foreach ($this->pagniateResult as $item) {
             $mapData = $map($item);

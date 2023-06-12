@@ -107,7 +107,7 @@
 
             var formData = new FormData($form[0]);
 
-            networkRequest('alert').ajax({
+            httpRequest('alert').config({
                 url: $form.attr('action'),
                 type: 'post',
                 data: formData,
@@ -135,7 +135,7 @@
     }
 
     function logout(){
-        networkRequest('alert').ajax({
+        httpRequest('alert').config({
             url : '{{ route('logout') }}',
             type : 'post'
         },function (response){
