@@ -5,7 +5,7 @@
 
     @stack('css')
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="sidebar-mini layout-fixed">
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->

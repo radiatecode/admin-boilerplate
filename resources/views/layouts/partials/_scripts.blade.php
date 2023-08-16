@@ -7,6 +7,9 @@
 <!-- moment date -->
 <script src="{{ asset('js/plugins/moment/moment.min.js') }}"></script>
 
+<!-- overlay scrollbar -->
+<script src="{{ asset('js/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
 

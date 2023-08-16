@@ -20,8 +20,12 @@
 
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- overlayScrollbars -->
+
+<!-- admin lte css -->
 <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
+
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="{{ asset('js/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
 <!-- sweet alert -->
 <link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2/sweetalert2.css') }}">
